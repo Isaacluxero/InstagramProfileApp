@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Instagram Insights</title>
+
+    <!-- Facebook SDK -->
+    <script
+      async
+      defer
+      crossOrigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js"
+      onload="initializeFacebookSDK()"
+    ></script>
+  </head>
+  <body>
+    <div id="root"></div> 
+  </body>
+</html>
+
+<script>
+  // Define the initializeFacebookSDK function globally
+  window.initializeFacebookSDK = function () {
+    window.FB.init({
+      appId: '1314792619875932', // Replace with your own Facebook App ID
+      autoLogAppEvents: true,
+      xfbml: true, // Parse social plugins on this page
+      version: 'v15.0', // Use the latest Graph API version
+    });
+
+    console.log('Facebook SDK Initialized');
+  };
+</script>
+

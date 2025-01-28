@@ -1,0 +1,22 @@
+
+# Ignore node_modules
+node_modules/
+
+# Ignore .DS_Store
+.DS_Store
+
+# Ignore log files
+*.log
+
+# Ignore environment files
+.env
+
+# Ignore SQLite databases
+*.sqlite
+
+# Ignore npm lock files
+package-lock.json
+
+# Ignore IDE configurations
+.vscode/
+.idea/
