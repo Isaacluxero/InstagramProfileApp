@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import '../css/App.css';
+import styles from '../css/Login.module.css';
 import { BusinessInstagramContext } from './BusinessInstagramContext'; 
+import instagramLogo from '../css/images/instagramLogo.jpeg';
 
 function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -60,21 +61,30 @@ function Login() {
   };
 
   return (
-    <div className="login-page">
-      <header className="login-header">
-        <h1>Instagram Profile Analyzer</h1>
+    <div className={styles.loginPage}>
+      <header className={styles.loginHeader}>
+        <div className={styles.boxWrapper}>
+          <img src={instagramLogo} alt="Instagram Logo" className={styles.logo} />
+          <h1>Instagram Profile Analyzer</h1>
+        </div>
       </header>
-      <div className="login-container">
+      <p className={styles.description}>
+        Analyze your Instagram profile to boost engagement and optimize content strategies.
+      </p>
+      <div className={styles.loginContainer}>
         {!isLoggedIn ? (
-          <button className="login-button" onClick={handleFacebookLogin}>
+          <button className={styles.loginButton} onClick={handleFacebookLogin}>
             Login with Facebook
           </button>
         ) : (
-          <h3 className="redirect-message">Redirecting to Homepage...</h3>
+          <h3 className={styles.redirectMessage}>Redirecting to Homepage...</h3>
         )}
+        <p className={styles.italicsDescription}>
+        * Note: In order to login a Instagram business account with a linked Facebook account is needed.
+      </p>
       </div>
     </div>
   );
-}
+};
 
 export default Login;

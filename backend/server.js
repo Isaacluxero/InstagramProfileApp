@@ -4,7 +4,8 @@ import cors from 'cors';
 import sqlite3 from 'sqlite3';
 import { calculateAverageHashtagsPerPost, getTopFiveHashtags,  categorizeHashtags } from './helper_files/HashTagsHelper.js';
 import { insertIntoTable, extractHashtagsAndStore } from './helper_files/LoginHelper.js';
-import { calculateAverageLikes, calculateAverageComments } from './helper_files/UserMetrics.js';
+import { calculateAverageEngagement, getEngagementTimeData} from './helper_files/UserMetricsHelper.js';
+import { getTopCommenter} from './helper_files/CommentsHelper.js';
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -31,6 +32,8 @@ app.post('/storeData', (req, res) => {
       caption TEXT,                -- Caption of the media
       like_count INTEGER,          -- Number of likes
       comments_count INTEGER,      -- Number of comments
+      comments JSON,               -- Number of comments
+      saves INTEGER,               -- Number of saves
       total_engagement INTEGER,    -- Number of comments
       media_type TEXT,             -- Type of media (e.g., image, video)
       media_url TEXT,              -- URL of the media
@@ -39,7 +42,7 @@ app.post('/storeData', (req, res) => {
   `;
   db.run(createTableQuery, function (err) {
     if (err) {
-      console.error('Error creating table:', err.message);
+      console.error('Error creating table:', err.message);zzzzz
       return res.status(500).json({ message: 'Error creating table' });
     }
     try {
@@ -104,6 +107,36 @@ app.post('/calculateAverageHashtags', async (req, res) => {
     res.json({ average });
   } catch (error) {
     console.error('Error calculating average hashtags:', error.message);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+/**
+ * Endpoint to calculate the top five hashtags used per user.
+ * @param {string} instaUserId - The Instagram user ID whose data is being analyzed.
+ * @returns {Object} JSON response containing the top five hashtags used.
+ */
+app.get('/getAverageEngagement', async (req, res) => {
+  try {
+    const result = await calculateAverageEngagement(); // Calls the function correctly
+    res.json(result);
+  } catch (error) {
+    console.error('Error calculating top commenter:', error.message);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+/**
+ * Endpoint to calculate the top five hashtags used per user.
+ * @param {string} instaUserId - The Instagram user ID whose data is being analyzed.
+ * @returns {Object} JSON response containing the top five hashtags used.
+ */
+app.get('/getEngagementTimeData', async (req, res) => {
+  try {
+    const result = await getEngagementTimeData(); // Calls the function correctly
+    res.json(result);
+  } catch (error) {
+    console.error('Error calculating top commenter:', error.message);
     res.status(500).json({ message: 'Internal server error' });
   }
 });

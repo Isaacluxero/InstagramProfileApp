@@ -67,12 +67,7 @@ function HashTags() {
     setAverageHashtags(null);
     setTopHashtags(null);
     setHashtagCategories(null);
-    if (businessInstagramId) {
-      getAverageHashtags();
-      getTopFiveHashTags();
-      getHashtagCategories();
-    }
-  }, [businessInstagramId]);
+  }, []);
 
   return (
     <div>

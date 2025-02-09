@@ -1,0 +1,109 @@
+/* General Styling */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center */
+  align-items: center;     /* Horizontally center */
+  height: 100vh;
+  background-color: #e0d4fa; /* Lighter purple background */
+  border-radius: 15px;  /* Rounded corners for the outer container */
+  padding: 20px; /* Add some padding to avoid content touching the edges */
+}
+
+/* Login Header Styling */
+.loginHeader {
+  text-align: center;
+  margin-bottom: 20px; /* Space below the header */
+}
+
+/* White box around logo and text */
+.boxWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px; /* Slightly rounded corners for inner box */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow */
+  background-color: #fff; /* White background for the box */
+}
+
+/* Logo styling */
+.logo {
+  width: 100px; /* Adjust size as needed */
+  height: auto;
+  margin-bottom: 10px; /* Space between logo and title */
+}
+
+/* Header Text */
+.loginHeader h1 {
+  font-size: 36px;
+  font-weight: bold;
+  color: #4267B2; /* Facebook blue */
+}
+
+/* Description Text Styling */
+.description {
+  font-size: 18px;
+  font-style: italic;
+  color: #555;
+  margin-top: 10px;
+  text-align: center;
+  max-width: 500px; /* Limit text width for better readability */
+  padding: 10px 20px; /* Add padding to create spacing */
+  border-radius: 10px; /* Slightly rounded edges */
+}
+
+/* Description Text Styling */
+.italicsDescription {
+  font-size: 12px;
+  color: #555;
+  margin-top: 20px;
+  font-style: italic;
+  text-align: center;
+  max-width: 500px; /* Limit text width for better readability */
+  padding: 10px 20px; /* Add padding to create spacing */
+  border-radius: 10px; /* Slightly rounded edges */
+}
+
+/* Login Button Container */
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Login Button Styling */
+.loginButton {
+  font-size: 15px;
+  padding: 15px 30px;
+  background-color: #4267B2; /* Facebook blue */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px; /* Add space between header and button */
+}
+
+.loginButton:hover {
+  background-color: #365899; /* Darker blue on hover */
+}
+
+/* Redirect Message Styling */
+.redirectMessage {
+  font-size: 18px;
+  color: #333;
+  font-weight: bold;
+}

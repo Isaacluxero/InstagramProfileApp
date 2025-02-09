@@ -5,7 +5,7 @@ import Login from './reactComponents/Login';
 import Home from './reactComponents/Home';
 import HashTags from './reactComponents/HashTags';
 import UserMetrics from './reactComponents/UserMetrics';
-import './css/App.css';
+import Comments from './reactComponents/Comments';
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/usermetrics" element={<UserMetrics/>} />
             <Route path="/hashtags" element={<HashTags/>} />
+            <Route path="/comments" element={<Comments/>} />
           </Routes>
         </div>
       </Router>

@@ -1,7 +1,15 @@
 import sqlite3 from 'sqlite3';
 import axios from 'axios';
+import fs from 'fs';
+import path from 'path';
+import dotenv from 'dotenv';
 const dbFile = 'instagram_data.sqlite';
 const BASE_URL = 'https://graph.facebook.com/v17.0';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+dotenv.config({ path: `${__dirname}/../.env` });
 
 /**
  * Inserts media data for a given Instagram user into the database.
@@ -9,12 +17,14 @@ const BASE_URL = 'https://graph.facebook.com/v17.0';
  * @param {string} accessToken - The access token for authentication.
  */
 async function insertIntoTable(instaUserId, accessToken) {
+  updateEnvVariable('ACCESS_TOKEN', accessToken);
+  updateEnvVariable('INSTA_USER_ID', instaUserId);
   const db = new sqlite3.Database(dbFile);
   const url = `${BASE_URL}/${instaUserId}/media?fields=id,caption,like_count,comments_count,media_type,media_url,timestamp&access_token=${accessToken}`;
   let currPage = await axios.get(url).then(response => response.data);
   const insertQuery = `
-    INSERT INTO user${instaUserId} (id, caption, like_count, comments_count, total_engagement, media_type, media_url, timestamp)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+    INSERT INTO user${instaUserId} (id, caption, like_count, comments_count, comments, saves, total_engagement, media_type, media_url, timestamp)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
   `;
   const checkQuery = `
     SELECT COUNT(*) AS count
@@ -23,8 +33,10 @@ async function insertIntoTable(instaUserId, accessToken) {
   `;
   while (currPage.data) {
     const currData = currPage.data;
+    var mediaIds = '';
     for (const post of currData) {
       const { id, caption, like_count, comments_count, media_type, media_url, timestamp } = post;
+      mediaIds += `${id},`;
       const exists = await new Promise((resolve) => {
         db.get(checkQuery, [id], (err, row) => {
           if (err) {
@@ -36,9 +48,10 @@ async function insertIntoTable(instaUserId, accessToken) {
         });
       });
       if (!exists) {
-        var totalEngagement = like_count + comments_count;
+        const getCommentsUrl = `${BASE_URL}/${id}/comments?fields=id,text,username&access_token=${accessToken}`;
+        var comments = await axios.get(getCommentsUrl).then(response => response.data.data);
         await new Promise((resolve) => {
-          db.run(insertQuery, [id, caption, like_count, comments_count, totalEngagement, media_type, media_url, timestamp], (err) => {
+          db.run(insertQuery, [id, caption, like_count, comments_count, JSON.stringify(comments), 0, 0, media_type, media_url, timestamp], (err) => {
             if (err) {
               console.error('Error inserting data:', err);
             }
@@ -47,6 +60,28 @@ async function insertIntoTable(instaUserId, accessToken) {
         });
       }
     }
+    mediaIds = mediaIds.slice(0,-1);
+    var mediaIdsArr = mediaIds.split(',');
+    const updateQuery = `
+      UPDATE user${instaUserId}
+      SET total_engagement = ?, saves = ?
+      WHERE id = ?;
+    `;
+    const insightsURL = `${BASE_URL}/?ids=${mediaIds}&fields=insights.metric(saved,total_interactions)&access_token=${accessToken}`;
+    var insights = await axios.get(insightsURL).then(response => response.data);
+    mediaIdsArr.forEach(async (currMediaId) => {
+      var currPost = insights[currMediaId];
+      var saves = currPost.insights.data[0].values[0].value;
+      var totalEngagement = currPost.insights.data[1].values[0].value;
+      await new Promise((resolve) => {
+        db.run(updateQuery, [totalEngagement, saves, currMediaId], (err) => {
+          if (err) {
+            console.error('Error inserting saves:', err);
+          }
+          resolve();
+        });
+      });
+    });
     if (currPage.paging && currPage.paging.next) {
       const nextPageUrl = currPage.paging.next;
       currPage = await axios.get(nextPageUrl).then(response => response.data);
@@ -57,24 +92,20 @@ async function insertIntoTable(instaUserId, accessToken) {
   db.close();
 }
 
-/**
- * Retrieves the Instagram username for a given page ID.
- * @param {string} pageId - The page ID of the Instagram user.
- * @param {string} accessToken - The access token for authentication.
- * @returns {Promise<string>} - The Instagram username.
- */
-async function getInstaUsername(pageId, accessToken) {
-  const url = `${BASE_URL}/${pageId}?fields=name&access_token=${accessToken}`;
-  try {
-    const response = await axios.get(url);
-    console.log(`Instagram username: ${response.data.name}`);
-    return response.data.name;
-  } catch (error) {
-    console.error(
-      'Error fetching Instagram username:',
-      error.response?.data || error.message
-    );
-    throw error;
+// Function to update or add new variables in the .env file
+function updateEnvVariable(key, value) {
+  const envFilePath = path.resolve(__dirname, '../.env'); // Path to .env file in 'backend'
+  // Read the current .env file
+  const envContent = fs.readFileSync(envFilePath, 'utf-8');
+  // Check if the key already exists
+  const regex = new RegExp(`^${key}=.*$`, 'm');
+  if (regex.test(envContent)) {
+      // If the key exists, replace it
+      const updatedContent = envContent.replace(regex, `${key}=${value}`);
+      fs.writeFileSync(envFilePath, updatedContent, 'utf-8');
+  } else {
+      // If the key doesn't exist, append it to the file
+      fs.appendFileSync(envFilePath, `\n${key}=${value}`, 'utf-8');
   }
 }
 
@@ -168,4 +199,4 @@ function extractHashtagsFromCaption(caption) {
   return hashtags;
 }
 
-export { insertIntoTable, getInstaUsername, extractHashtagsAndStore };
+export { insertIntoTable, extractHashtagsAndStore, updateEnvVariable};

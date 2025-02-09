@@ -1,12 +1,23 @@
 from flask import Flask, request, jsonify
-from helper_files.HashTagsHelper import categorize_hashtags
+from detoxify import Detoxify
+
 app = Flask(__name__)
 
-@app.route('/process', methods=['POST'])
-def process_data():
-    data = request.json
-    result = categorize_hashtags(data['input'])
-    return jsonify({'result': result})
+# Load the Detoxify model
+detoxify_model = Detoxify('original')
 
-if __name__ == '__main__':
-    app.run(port=5000)
+@app.route('/predict', methods=['POST'])
+def predict():
+    data = request.get_json()
+    text = data.get("text", "")
+
+    if not text:
+        return jsonify({"error": "No text provided"}), 400
+
+    # Run Detoxify model
+    result = detoxify_model.predict(text)
+    
+    return jsonify(result)
+
+if __name__ == "__main__":
+    app.run(debug=True)
