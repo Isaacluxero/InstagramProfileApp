@@ -1,0 +1,80 @@
+/* General container styling */
+.hashTagsPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to the top */
+    align-items: center;         /* Horizontally center content */
+    min-height: 100vh;           /* Ensure the container takes at least the full viewport height */
+    background-color: #e0d4fa;   /* Lighter purple background */
+    border-radius: 15px;         /* Rounded corners */
+    padding: 20px;
+    padding-top: 90px;           /* Optional: Extra space from the top can be adjusted */
+    text-align: center;
+  }
+  
+  /* Header styling */
+  .hashTagsPage h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 0px;
+  }
+  
+  /* Paragraph styling */
+  .hashTagsPage p {
+    font-size: 18px;
+    margin-bottom: 0px;
+  }
+
+  .graphContainer {
+    display: flex; /* Flexbox to align items side by side */
+    justify-content: space-between; /* Space between description and graph */
+    align-items: flex-start; /* Align items at the top */
+    width: 90%; /* Adjust width as needed */
+    max-width: 1200px; /* Limit the width */
+    margin-top: 70px; /* Space between sections */
+    margin-bottom: 0px; /* Space between graphs */
+  }
+  
+  /* Description Section */
+  .description {
+    width: 30%; /* Set the width for the description */
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    font-size: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-right: 20px; /* Add space between description and graph */
+  }
+  
+/* Back Button Styling (Optional for navigation) */
+.login-back-button {
+    position: fixed; /* Position fixed to the screen */
+    top: 10px;       /* Distance from the top of the screen */
+    left: 10px;      /* Distance from the left of the screen */
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.1s ease;
+    z-index: 1000; /* Ensure the button is on top of other content */
+  }
+  
+  .login-back-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+
+  .topDescription {
+    width: 50%; /* Set the width for the description */
+    display: flex; /* Flexbox to align items inside */
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    padding: 20px;
+    font-size: 18px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Horizontally center within its parent */
+  }

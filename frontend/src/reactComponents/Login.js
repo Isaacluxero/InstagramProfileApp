@@ -1,13 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState} from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import styles from '../css/Login.module.css';
-import { BusinessInstagramContext } from './BusinessInstagramContext'; 
 import instagramLogo from '../css/images/instagramLogo.jpeg';
 
 function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { businessInstagramId, setBusinessInstagramId } = useContext(BusinessInstagramContext);
-
   const navigate = useNavigate(); 
 
   // Handle Facebook Login
@@ -54,7 +51,6 @@ function Login() {
       .then((response) => response.json())
       .then((data) => {
         if (data.instagram_business_account) {
-          setBusinessInstagramId(data.instagram_business_account.id);
           storeInstaUserInfo(data.instagram_business_account.id, accessToken, pageId);
         } 
       });

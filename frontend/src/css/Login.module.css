@@ -13,12 +13,14 @@ body {
 .loginPage {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Vertically center */
-  align-items: center;     /* Horizontally center */
+  justify-content: flex-start; /* Align items at the top */
+  align-items: center;         /* Horizontally center */
   height: 100vh;
-  background-color: #e0d4fa; /* Lighter purple background */
-  border-radius: 15px;  /* Rounded corners for the outer container */
-  padding: 20px; /* Add some padding to avoid content touching the edges */
+  background-color: #e0d4fa;    /* Lighter purple background */
+  border-radius: 15px;          /* Rounded corners for the outer container */
+  padding: 20px;
+  padding-top: 180px;            /* Optional: Adjust this value for extra space from the top */
+  text-align: center;
 }
 
 /* Login Header Styling */

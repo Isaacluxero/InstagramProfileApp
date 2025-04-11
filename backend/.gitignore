@@ -2,8 +2,6 @@
 node_modules/
 
 venv/
-# Ignore .DS_Store
-.DS_Store
 
 # Ignore log files
 *.log
@@ -20,6 +18,5 @@ package-lock.json
 # Ignore IDE configurations
 .vscode/
 .idea/
-
 .these
 

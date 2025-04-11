@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 function UserMetricsGraph({data, metric}) {
@@ -6,11 +6,11 @@ function UserMetricsGraph({data, metric}) {
     const dynamicHeader = getDynamicHeader(metric);
 
     return (
-      <div style={{ width: '70vw', height: '60vh', margin: '0 auto' }}> {/* Increased width and height */}
+      <div style={{ width: '70vw', height: '50vh', margin: '0 auto' }}> {/* Increased width and height */}
         <h3 style={{ textAlign: 'center', fontSize: '24px', marginBottom: '10px' }}>
           {dynamicHeader} Over Time
         </h3>      
-        <ResponsiveContainer width="100%" height="100%"> {/* Fills the parent div */}
+        <ResponsiveContainer width="100%" height="80%"> {/* Fills the parent div */}
           <LineChart data={dataFormatted}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="timestamp" />
@@ -27,9 +27,13 @@ function UserMetricsGraph({data, metric}) {
 function formatDataTimestamps(dataArray) {
   return dataArray.map(entry => {
     try {
+      if (!entry.timestamp) {
+        // If timestamp is null or undefined, set it to null (or you can choose an empty string)
+        return { ...entry, timestamp: null };
+      }
       return {
         ...entry,
-        timestamp: new Date(entry.timestamp).toISOString().split('T')[0] // Extracts only the date
+        timestamp: new Date(entry.timestamp).toISOString().split('T')[0]
       };
     } catch (error) {
       console.error('Error processing entry:', entry);
@@ -38,6 +42,7 @@ function formatDataTimestamps(dataArray) {
     }
   });
 }
+
 
 function getDynamicHeader(metricType) {
   let header;
@@ -53,6 +58,9 @@ function getDynamicHeader(metricType) {
       break;
     case 'total_engagement':
       header = "Total Engagement";
+      break;
+    case 'hashtag_count':
+      header = "Hashtag";
       break;
     default:
       header = "General Metrics";

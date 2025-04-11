@@ -1,0 +1,56 @@
+/* Container Styling */
+body {
+    background-color: #e0d4fa;
+  }
+.timeBasedMetricsContainer {
+    text-align: center;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  /* Header Styling */
+  .timeBasedMetricsHeader {
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 70px;
+    margin-bottom: 20px;
+  }
+  
+  /* Button Styling */
+  .timeBasedMetricsButton {
+    font-size: 20px;
+    padding: 20px 25px;
+    background-color: #4267B2; /* Facebook blue */
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+    margin-top: 30px;
+  }
+  
+  .timeBasedMetricsButton:hover {
+    background-color: #365899; /* Darker blue on hover */
+  }
+  
+  /* Back Button Styling */
+  .backButton {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.1s ease;
+  }
+  
+  .backButton:hover {
+    background-color: #0056b3;
+  }

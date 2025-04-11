@@ -1,46 +1,49 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
 import styles from '../css/UserMetrics.module.css';
-import UserMetricsGraph from './UserMetricsGraph.js';
+import UserMetricsGraph from './reactUtils/UserMetricsGraph.js';
 
 function UserMetrics() {
   const navigate = useNavigate(); 
   const goToLogin = () => {
     navigate('/home'); 
   };
+
+  // State variables to hold the average metrics and time-based engagement data
   const [averageComments, setAverageComments] = useState(false);
   const [averageLikes, setAverageLikes] = useState(false);
   const [averageSaves, setAverageSaves] = useState(false);
   const [averageEngagement, setAverageEngagement] = useState(false);
-  const [likesTimeData, setlikesTimeData] = useState([1, 2, 3]);
+  const [likesTimeData, setLikesTimeData] = useState([1, 2, 3]);
 
-
-  const fetchAverageEngagement= async () => {
+  // Fetch average engagement metrics (likes, comments, saves, total engagement)
+  const fetchAverageEngagement = async () => {
     try {
       const { data } = await axios.get('http://localhost:5001/getAverageEngagement');
-      setAverageLikes(data.averageLikes.toFixed(2));
-      setAverageComments(data.averageComments.toFixed(2));
-      setAverageSaves(data.averageSaves.toFixed(2));
-      setAverageEngagement(data.averageEngagement.toFixed(2));
+      setAverageLikes(data.averageLikes.toFixed(2)); // Set average likes
+      setAverageComments(data.averageComments.toFixed(2)); // Set average comments
+      setAverageSaves(data.averageSaves.toFixed(2)); // Set average saves
+      setAverageEngagement(data.averageEngagement.toFixed(2)); // Set average total engagement
     } catch (error) {
       console.error('Error fetching average comments:', error);
     }
   };
 
-  const fetchEngagementTimeData= async () => {
+  // Fetch time-based engagement data (like count, comments count, saves, total engagement over time)
+  const fetchEngagementTimeData = async () => {
     try {
       const { data } = await axios.get('http://localhost:5001/getEngagementTimeData');
-
-      setlikesTimeData(data);
+      setLikesTimeData(data); // Set the fetched time-based engagement data
     } catch (error) {
-      console.error('Error fetching average comments:', error);
+      console.error('Error fetching engagement time data:', error);
     }
   };
 
+  // Fetch data when the component mounts
   useEffect(() => {
-    fetchAverageEngagement(null);
-    fetchEngagementTimeData(null);
+    fetchAverageEngagement(); // Fetch average engagement metrics
+    fetchEngagementTimeData(); // Fetch time-based engagement data
   }, []); 
 
   return (
@@ -51,6 +54,7 @@ function UserMetrics() {
           This set of graphs provides an overview of user engagement over time. By analyzing various metrics, you can better understand how your content performs and identify opportunities for improvement.
         </p>
       </div>
+      {/* Button to navigate back to home */}
       <button 
         className={styles['login-back-button']} 
         onClick={goToLogin} 
@@ -58,6 +62,8 @@ function UserMetrics() {
       >
         Back to Home
       </button>
+
+      {/* Graph container for average likes per post */}
       <div className={styles.graphContainer}>
         <div className={styles.description}>
           <h3>Average # of Likes Per Post: {averageLikes}</h3>
@@ -66,8 +72,10 @@ function UserMetrics() {
             engagement and the popularity of your content. The higher the like count, the better your content is resonating with your followers.
           </p>
         </div>
-        <UserMetricsGraph data={likesTimeData} metric="like_count" />
+        <UserMetricsGraph data={likesTimeData} metric="like_count" /> {/* Graph for likes */}
       </div>
+
+      {/* Graph container for average comments per post */}
       <div className={styles.graphContainer}>
         <div className={styles.description}>
           <h3>Average # of Comments Per Post: {averageComments}</h3>
@@ -76,8 +84,10 @@ function UserMetrics() {
             into what your audience is thinking. A higher comment count can indicate stronger interaction and community involvement with your posts.
           </p>
         </div>
-        <UserMetricsGraph data={likesTimeData} metric="comments_count" />
+        <UserMetricsGraph data={likesTimeData} metric="comments_count" /> {/* Graph for comments */}
       </div>
+
+      {/* Graph container for average saves per post */}
       <div className={styles.graphContainer}>
         <div className={styles.description}>
           <h3>Average # of Saves Per Post: {averageSaves}</h3>
@@ -86,8 +96,10 @@ function UserMetrics() {
             revisit later, which is a key indicator of long-term interest in your content. Higher saves can lead to increased visibility in users’ feeds.
           </p>
         </div>
-        <UserMetricsGraph data={likesTimeData} metric="saves" />
+        <UserMetricsGraph data={likesTimeData} metric="saves" /> {/* Graph for saves */}
       </div>
+
+      {/* Graph container for average total engagement per post */}
       <div className={styles.graphContainer}>
         <div className={styles.description}>
           <h3>Average Total Engagement Per Post: {averageEngagement}</h3>
@@ -97,10 +109,11 @@ function UserMetrics() {
             presence.
           </p>
         </div>
-        <UserMetricsGraph data={likesTimeData} metric="total_engagement" />
+        <UserMetricsGraph data={likesTimeData} metric="total_engagement" /> {/* Graph for total engagement */}
       </div>
     </div>
   );  
 }
 
 export default UserMetrics;
+
