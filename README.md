@@ -4,6 +4,12 @@ A comprehensive analytics dashboard for Instagram business profiles that provide
 
 ## Features
 
+- **Login Page**
+  - Login Page connected to facebook
+  - Logging in is when all the intial data is loaded
+  - <img width="1359" alt="Screenshot 2025-04-12 at 1 11 23 PM" src="https://github.com/user-attachments/assets/05de1319-aae1-49a3-b65b-b352e0a97128" />
+
+ 
 - **User Metrics Dashboard**
   - Track likes, comments, and saves over time
   - Analyze total engagement trends
