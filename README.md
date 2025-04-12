@@ -7,13 +7,18 @@ A comprehensive analytics dashboard for Instagram business profiles that provide
 - **Login Page**
   - Login Page connected to facebook
   - Logging in is when all the intial data is loaded
-  - <img width="1359" alt="Screenshot 2025-04-12 at 1 11 23 PM" src="https://github.com/user-attachments/assets/05de1319-aae1-49a3-b65b-b352e0a97128" />
-
+   <img width="1359" alt="Screenshot 2025-04-12 at 1 11 23 PM" src="https://github.com/user-attachments/assets/05de1319-aae1-49a3-b65b-b352e0a97128" />
+  
+- **Home Page**
+  - Home Page for selecting and seeing all the different features available
+  <img width="796" alt="Screenshot 2025-04-12 at 1 11 39 PM" src="https://github.com/user-attachments/assets/ae78c5e2-c0c9-438d-b1d0-437066499873" />
  
 - **User Metrics Dashboard**
   - Track likes, comments, and saves over time
   - Analyze total engagement trends
   - Visualize follower growth patterns
+   
+
 
 - **Hashtag Analytics**
   - Identify top-performing hashtags
