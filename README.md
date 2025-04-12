@@ -185,11 +185,9 @@ cd frontend
 npm start
 ```
 
-The application will be available at `http://localhost:3000`
-
 ## API Endpoints
 
-### Node.js Backend (Port 5001)
+### Node.js Backend
 - `POST /storeData` - Store Instagram data
 - `GET /getTopHashtags` - Get top hashtags
 - `GET /getCommentsClassified` - Get classified comments
@@ -200,6 +198,6 @@ The application will be available at `http://localhost:3000`
 - `GET /getEngagementTimeData` - Get engagement time data
 - `GET /getTimeMetrics` - Get time-based metrics
 
-### Python Backend (Port 3002)
+### Python Backend
 - `GET /predict` - Predict emotions from comments
 
