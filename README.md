@@ -4,6 +4,116 @@ A comprehensive analytics dashboard for Instagram business profiles that provide
 
 ## Features
 
+### User Metrics Dashboard
+The User Metrics Dashboard provides a comprehensive view of your Instagram profile's performance over time. It includes:
+
+**Business Value:** In today's competitive social media landscape, understanding your content's performance is crucial for business growth. The User Metrics Dashboard was designed to give businesses a clear picture of their Instagram ROI, helping them make data-driven decisions about their content strategy. By tracking engagement patterns and follower growth, businesses can identify what content resonates with their audience, optimize their posting strategy, and ultimately drive more conversions and brand awareness.
+
+- **Engagement Tracking**
+  - Real-time monitoring of likes, comments, and saves
+  - Interactive line charts showing engagement trends
+  - Customizable date ranges for historical analysis
+  - Comparison of different engagement metrics
+
+- **Follower Analytics**
+  - Visual representation of follower growth patterns
+  - Identification of growth spikes and trends
+  - Analysis of follower acquisition sources
+  - Correlation between content types and follower growth
+
+- **Performance Metrics**
+  - Average engagement rate calculations
+  - Post reach and impressions tracking
+  - Content type performance comparison
+  - ROI analysis for different content strategies
+
+### Hashtag Analytics
+The Hashtag Analytics dashboard helps optimize your hashtag strategy with:
+
+**Business Value:** Hashtags are the backbone of Instagram discoverability, yet many businesses struggle to use them effectively. This dashboard was created to solve this challenge by providing actionable insights into hashtag performance. By understanding which hashtags drive the most engagement and reach, businesses can increase their content visibility, attract more relevant followers, and improve their overall social media presence. The categorization and trend analysis features help businesses stay ahead of the competition by identifying emerging hashtag opportunities and optimizing their hashtag strategy in real-time.
+
+- **Performance Analysis**
+  - Top-performing hashtags identification
+  - Engagement rate per hashtag
+  - Reach and impressions by hashtag
+  - Historical performance tracking
+
+- **Categorization System**
+  - Automatic categorization of hashtags by content type
+  - Industry-specific hashtag recommendations
+  - Trending hashtag suggestions
+  - Competitor hashtag analysis
+
+- **Usage Optimization**
+  - Optimal hashtag count recommendations
+  - Best-performing hashtag combinations
+  - Time-based hashtag performance
+  - Hashtag frequency analysis
+
+- **Trend Analysis**
+  - Hashtag popularity trends
+  - Seasonal hashtag recommendations
+  - Emerging hashtag opportunities
+  - Hashtag saturation warnings
+
+### Comment Analysis
+The Comment Analysis dashboard provides deep insights into audience engagement through:
+
+**Business Value:** Customer feedback and engagement are goldmines of business intelligence, but manually analyzing comments is time-consuming and often incomplete. The Comment Analysis dashboard was developed to transform this unstructured data into actionable business insights. By automatically analyzing sentiment and emotions in comments, businesses can quickly identify customer satisfaction levels, detect potential PR issues before they escalate, and understand their audience's preferences. This real-time feedback loop enables businesses to make quick adjustments to their products, services, and content strategy, leading to improved customer satisfaction and brand loyalty.
+
+- **Sentiment Analysis**
+  - Real-time sentiment detection
+  - Positive vs. negative comment tracking
+  - Emotion classification (happy, sad, angry, etc.)
+  - Sentiment trend analysis
+
+- **Engagement Insights**
+  - Most engaging comment types
+  - Response rate tracking
+  - Comment length analysis
+  - Emoji usage patterns
+
+- **Feedback Analysis**
+  - Common themes in comments
+  - Customer service insights
+  - Product feedback aggregation
+  - Audience preference identification
+
+- **Actionable Recommendations**
+  - Content improvement suggestions
+  - Engagement strategy recommendations
+  - Response template suggestions
+  - Crisis management alerts
+
+### Time-Based Analytics
+The Time-Based Analytics dashboard helps optimize your posting schedule with:
+
+**Business Value:** Timing is everything in social media marketing. The Time-Based Analytics dashboard was created to help businesses maximize their content's impact by posting at optimal times. By analyzing engagement patterns across different time periods, businesses can ensure their content reaches the maximum number of followers when they're most active. This not only improves engagement rates but also helps businesses plan their content calendar more effectively, leading to better resource allocation and higher ROI on social media efforts. The heatmap visualization makes it easy to identify patterns and adjust posting schedules accordingly.
+
+- **Optimal Posting Times**
+  - Best days of the week for posting
+  - Optimal time slots by engagement type
+  - Time zone optimization
+  - Audience activity patterns
+
+- **Engagement Patterns**
+  - Hour-by-hour engagement analysis
+  - Day-of-week performance comparison
+  - Seasonal engagement trends
+  - Holiday-specific recommendations
+
+- **Performance Metrics**
+  - Engagement rate by time period
+  - Reach and impressions timing
+  - Comment response time analysis
+  - Story viewing patterns
+
+- **Visual Analytics**
+  - Interactive heatmap of engagement
+  - Time-based performance charts
+  - Comparative analysis tools
+  - Custom time range selection
+
 - **Login Page**
   - Login Page connected to facebook
   - Logging in is when all the intial data is loaded
@@ -11,30 +121,7 @@ A comprehensive analytics dashboard for Instagram business profiles that provide
   
 - **Home Page**
   - Home Page for selecting and seeing all the different features available
- 
-- **User Metrics Dashboard**
-  - Track likes, comments, and saves over time
-  - Analyze total engagement trends
-  - Visualize follower growth patterns
 
-- **Hashtag Analytics**
-  - Identify top-performing hashtags
-  - Categorize hashtags by content type
-  - Track hashtag usage patterns over time
-  - Calculate optimal hashtag count per post
-
-- **Comment Analysis**
-  - Sentiment analysis of comments
-  - Emotion detection in user feedback
-  - Track positive vs. negative engagement
-  - Generate actionable insights from user feedback
-
-- **Time-Based Analytics**
-  - Identify optimal posting times
-  - Track engagement by time of day
-  - Analyze performance by time period
-  - Heatmap visualization of engagement patterns
-    
 - **Video Walkthrough of App**
   https://youtu.be/hKBCOxJLuZY
 
