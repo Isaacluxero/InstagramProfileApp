@@ -1,4 +1,4 @@
-# Instagram Profile Analytics
+# Instagram Profile Analyzer
 
 A comprehensive analytics dashboard for Instagram business profiles that provides insights into post performance, engagement metrics, and content optimization recommendations.
 - **Video Walkthrough of App**
