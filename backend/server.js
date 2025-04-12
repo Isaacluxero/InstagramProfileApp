@@ -19,7 +19,7 @@ const dbFile = 'instagram_data.sqlite';
  * @returns {Object} JSON response indicating success or failure.
  */
 app.post('/storeData', (req, res) => {
-  const { userId, accessToken } = req.body; 
+  const { userId, accessToken } = req.body;
   const db = new sqlite3.Database(dbFile, (err) => {
     if (err) {
       console.error('Failed to open database:', err.message);
@@ -42,14 +42,14 @@ app.post('/storeData', (req, res) => {
       timestamp TEXT               
     );
   `;
-  
+
   db.run(createTableQuery, function (err) {
     if (err) {
       console.error('Failed to create table:', err.message);
       return res.status(500).json({ message: 'Failed to create the table' });
     }
     try {
-      insertIntoTable(userId, accessToken)  
+      insertIntoTable(userId, accessToken)
         .then(() => {
           extractHashtagsAndStore(userId, accessToken);
           res.json({ message: 'Data saved successfully' });
@@ -67,13 +67,11 @@ app.post('/storeData', (req, res) => {
 
 /**
  * Endpoint to calculate the top five hashtags used per user.
- * @param {string} instaUserId - The Instagram user ID whose data is being analyzed.
  * @returns {Object} JSON response containing the top five hashtags used.
  */
-app.post('/getTopHashtags', async (req, res) => {
+app.get('/getTopHashtags', async (req, res) => {
   try {
-    const { instaUserId } = req.body; 
-    const result = await getTopFiveHashtags(instaUserId);
+    const result = await getTopFiveHashtags();
     res.json({ result });
   } catch (error) {
     console.error('Failed to calculate top hashtags:', error.message);
@@ -177,6 +175,51 @@ app.get('/getEngagementTimeData', async (req, res) => {
   } catch (error) {
     console.error('Failed to get engagement time data:', error.message);
     res.status(500).json({ message: 'Internal server error while fetching engagement time data' });
+  }
+});
+
+/**
+ * Time-based metrics endpoint
+ * @returns {Object} JSON response containing time-based analytics data.
+ */
+app.get('/getTimeMetrics', async (req, res) => {
+  try {
+    // Sample data for time-based metrics
+    const timeData = [
+      { period: 'Morning (6AM-12PM)', posts: 15, engagement: 4.2, reach: 1200 },
+      { period: 'Afternoon (12PM-6PM)', posts: 20, engagement: 5.8, reach: 1800 },
+      { period: 'Evening (6PM-12AM)', posts: 18, engagement: 6.5, reach: 2200 },
+      { period: 'Night (12AM-6AM)', posts: 8, engagement: 3.2, reach: 800 }
+    ];
+
+    const bestTimes = [
+      { day: 'Monday', bestTime: '2:00 PM', engagement: 6.8 },
+      { day: 'Tuesday', bestTime: '3:30 PM', engagement: 7.2 },
+      { day: 'Wednesday', bestTime: '1:00 PM', engagement: 6.5 },
+      { day: 'Thursday', bestTime: '4:00 PM', engagement: 7.5 },
+      { day: 'Friday', bestTime: '5:00 PM', engagement: 8.2 },
+      { day: 'Saturday', bestTime: '11:00 AM', engagement: 7.8 },
+      { day: 'Sunday', bestTime: '10:00 AM', engagement: 6.9 }
+    ];
+
+    const heatmapData = [
+      { time: '6AM', engagement: 2.5 },
+      { time: '9AM', engagement: 4.2 },
+      { time: '12PM', engagement: 5.8 },
+      { time: '3PM', engagement: 7.2 },
+      { time: '6PM', engagement: 6.5 },
+      { time: '9PM', engagement: 5.2 },
+      { time: '12AM', engagement: 3.8 }
+    ];
+
+    res.json({
+      timeData,
+      bestTimes,
+      heatmapData
+    });
+  } catch (error) {
+    console.error('Error fetching time metrics:', error);
+    res.status(500).json({ error: 'Failed to fetch time metrics' });
   }
 });
 

@@ -3,19 +3,25 @@ import styles from '../css/Comments.module.css';
 import axios from 'axios';
 import UserMetricsBarChart from './reactUtils/UserMetricsBarChart.js';
 import LoadingPage from './reactUtils/LoadingPage.js';
+import { useNavigate } from 'react-router-dom';
 
 function Comments() {
+  const navigate = useNavigate();
   const [commentsClassified, setCommentsClassified] = useState(null);
   const [recommendation, setRecommendation] = useState(null);
   const [loading, setLoading] = useState(true); // State to handle loading status
   const [emotionData, setEmotionData] = useState(null);
+
+  const goToHome = () => {
+    navigate('/home');
+  };
 
   // Fetch classified comments (positive, negative, neutral)
   const getcommentsClassified = async () => {
     try {
       const { data } = await axios.get('http://localhost:5001/getCommentsClassified');
       setCommentsClassified(data.result);
-      setRecommendation(getRecommendation(data.result)); 
+      setRecommendation(getRecommendation(data.result));
     } catch (error) {
       console.error('Error fetching classified comments:', error);
     }
@@ -31,7 +37,7 @@ function Comments() {
       console.error('Error fetching emotion data:', error);
     }
   };
-  
+
   // UseEffect hook to fetch data when the component mounts
   useEffect(() => {
     getcommentsClassified(); // Fetch classified comments
@@ -54,18 +60,25 @@ function Comments() {
   return (
     <div className={styles.commentsPage}>
       <h1 className={styles.title}>Comments Page</h1>
-    
+      <button
+        className={styles['login-back-button']}
+        onClick={goToHome}
+        title="Go back to Home page"
+      >
+        Back to Home
+      </button>
+
       <div className={styles.topDescription}>
-        The Comments Analysis Dashboard provides insights into user engagement by analyzing the sentiment of comments across all posts. 
+        The Comments Analysis Dashboard provides insights into user engagement by analyzing the sentiment of comments across all posts.
         Use this dashboard to identify trends, improve content strategy, and boost audience engagement! 🚀
       </div>
-      
+
       {/* Graph showing the positive vs negative comments */}
       <div className={styles.graphContainer}>
         <div className={styles.description}>
           <h3>Positive Vs Negative Comments</h3>
           <p>
-            This graph displays the sentiment of all the comments from all posts, being divided into positive, negative, and neutral sentiment. 
+            This graph displays the sentiment of all the comments from all posts, being divided into positive, negative, and neutral sentiment.
             Negative comments would be characterized as hate comments, while positive comments would be supportive.
           </p>
           <div className={styles.feedbackBox}>
@@ -105,7 +118,7 @@ function getRecommendation(data) {
   const neutral = data.find(d => d.label === "NEUTRAL") || { count: 0 };
 
   const totalComments = positive.count + negative.count + neutral.count;
-  
+
   if (totalComments === 0) {
     return "No comments analyzed. Try gathering more engagement.";
   }

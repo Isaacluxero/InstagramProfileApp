@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function HashTags() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const goToLogin = () => {
     navigate('/home'); // Navigate to the home page
   };
@@ -51,19 +51,22 @@ function HashTags() {
     }
   };
 
-  // Fetch the top 5 hashtags for the business Instagram user
+  // Fetch the top 5 hashtags
   const getTopFiveHashTags = async () => {
-    const data = { instaUserId: businessInstagramId }; // Prepare the data with the user ID
     try {
-      const response = await fetch('http://localhost:5001/getTopHashtags', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data), // Send the user data to fetch top hashtags
-      });
-      const result = await response.json();
-      setTopHashtags(result.result.topHashtags); // Set the top hashtags
+      const { data } = await axios.get('http://localhost:5001/getTopHashtags');
+      if (data && data.result) {
+        // Transform the data to match the expected format for UserMetricsBarChart
+        const transformedData = data.result.map(item => ({
+          hashtag: item.hashtag,
+          count: item.count
+        }));
+        setTopHashtags(transformedData);
+      } else {
+        console.error('Invalid response format:', data);
+      }
     } catch (error) {
-      console.error('Error fetching top hashtags:', error); // Log error if API call fails
+      console.error('Error fetching top hashtags:', error);
     }
   };
 
@@ -87,44 +90,44 @@ function HashTags() {
   return (
     <div className={styles.hashTagsPage}>
       <h1 className={styles.generalMetricsHeader}>Hashtags</h1>
-      <button 
-        className={styles['login-back-button']} 
-        onClick={goToLogin} 
+      <button
+        className={styles['login-back-button']}
+        onClick={goToLogin}
         title="Go back to Home page">
         Back to Home
       </button>
-      
+
       {/* Display Average Hashtags Per Post */}
       <div className={styles.graphContainer}>
         <div className={styles.description}>
           <h3>Average # of Hashtags Per Post: {averageHashtags ? averageHashtags.toFixed(2) : "N/A"}</h3>
           <p>
-            This graph calculates the total engagement per post, factoring in likes, comments, and saves. 
-            Total engagement provides a holistic view of how your posts are performing and helps track overall user interaction. 
+            This graph calculates the total engagement per post, factoring in likes, comments, and saves.
+            Total engagement provides a holistic view of how your posts are performing and helps track overall user interaction.
             Optimizing for engagement is a surefire way to grow your online presence.
           </p>
         </div>
         <UserMetricsGraph data={hashtagTimeData} metric="hashtag_count" /> {/* Render graph for hashtag counts over time */}
-      </div>  
-      
+      </div>
+
       {/* Display Top Hashtags Used */}
       <div className={styles.graphContainer}>
         <div className={styles.description}>
           <h3>Top Hashtags Used</h3>
           <p>
-            This graph displays the most frequently used hashtags in your posts. Understanding your most used hashtags can help you optimize your strategy 
+            This graph displays the most frequently used hashtags in your posts. Understanding your most used hashtags can help you optimize your strategy
             for better reach and engagement.
           </p>
         </div>
         {topHashtags ? <UserMetricsBarChart data={topHashtags} metric={'hashtag'} /> : <LoadingPage />} {/* Display top hashtags chart or loading page */}
-      </div >
+      </div>
 
       {/* Display Categories of Hashtags */}
-      <div className={styles.graphContainer} style={{ marginTop: '0px', marginBottom:'300px' }}>
+      <div className={styles.graphContainer} style={{ marginTop: '0px', marginBottom: '300px' }}>
         <div className={styles.description}>
           <h3>Categories of Hashtags</h3>
           <p>
-            This graph displays the most frequently used hashtags in your posts. Understanding your most used hashtags can help you optimize your strategy 
+            This graph displays the most frequently used hashtags in your posts. Understanding your most used hashtags can help you optimize your strategy
             for better reach and engagement.
           </p>
         </div>

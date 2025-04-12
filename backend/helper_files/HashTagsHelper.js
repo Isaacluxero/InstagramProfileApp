@@ -34,14 +34,14 @@ async function getHashtagCategoriesAverageData() {
     const query = `SELECT * FROM hashtags${USER_ID}`;
     const rows = await getAllRows(db, query);
     let hashtags = [];
-    let hashtagData = {}; 
+    let hashtagData = {};
     let hashtagEngagement = {};
 
-    rows.forEach(row => { 
+    rows.forEach(row => {
       hashtags.push(row.hashtag);
       hashtagEngagement[row.hashtag] = {
-        likes: row.likes, 
-        comments: row.comments, 
+        likes: row.likes,
+        comments: row.comments,
         total_engagement: row.total_engagement
       };
     });
@@ -190,7 +190,7 @@ async function getTopFiveHashtags() {
   try {
     const query = `SELECT hashtag, media_ids FROM hashtags${USER_ID}`;
     const rows = await getAllRows(db, query);
-    
+
     // Count occurrences of each hashtag
     const hashtagCounts = rows.map(row => ({
       hashtag: row.hashtag,
@@ -207,9 +207,9 @@ async function getTopFiveHashtags() {
   }
 }
 
-export { 
-  calculateAverageHashtagsPerPost, 
-  getTopFiveHashtags, 
-  getHashtagsTimeData, 
-  getHashtagCategoriesAverageData 
+export {
+  calculateAverageHashtagsPerPost,
+  getTopFiveHashtags,
+  getHashtagsTimeData,
+  getHashtagCategoriesAverageData
 };

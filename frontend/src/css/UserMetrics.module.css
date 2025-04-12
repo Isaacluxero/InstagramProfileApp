@@ -2,30 +2,41 @@
 .userMetricsPage {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Align content to the top */
-  align-items: center; /* Horizontally center */
-  height: auto; /* Allow height to be based on content */
-  min-height: 100vh; /* Ensure it takes up at least the full viewport height */
-  background-color: #e0d4fa; /* Lighter purple background */
-  border-radius: 15px; /* Rounded corners for the outer container */
-  padding: 20px; /* Add some padding to avoid content touching the edges */
+  justify-content: flex-start;
+  /* Align content to the top */
+  align-items: center;
+  /* Horizontally center */
+  height: auto;
+  /* Allow height to be based on content */
+  min-height: 100vh;
+  /* Ensure it takes up at least the full viewport height */
+  background-color: #e0d4fa;
+  /* Lighter purple background */
+  border-radius: 15px;
+  /* Rounded corners for the outer container */
+  padding: 20px;
+  /* Add some padding to avoid content touching the edges */
   text-align: center;
-  overflow: auto; /* Allow scrolling if content overflows */
+  overflow: auto;
+  /* Allow scrolling if content overflows */
 }
 
 /* Back Button Styling (Optional for navigation) */
 .loginBackButton {
-  position: fixed; /* Position fixed to the screen */
-  top: 10px;
-  left: 20px;
+  position: sticky;
+  /* Position sticky to the screen */
+  top: 0;
+  left: 0;
   padding: 10px 20px;
   font-size: 14px;
   background-color: #007bff;
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 0 0 5px 0;
   transition: background-color 0.3s ease;
+  z-index: 1000;
+  width: fit-content;
 }
 
 .loginBackButton:hover {
@@ -34,44 +45,59 @@
 
 /* Back Button Styling (Optional for navigation) */
 .login-back-button {
-  position: fixed; /* Position fixed to the screen */
-  top: 10px;       /* Distance from the top of the screen */
-  left: 10px;      /* Distance from the left of the screen */
+  position: sticky;
+  /* Position sticky to the screen */
+  top: 0;
+  /* Distance from the top of the screen */
+  left: 0;
+  /* Distance from the left of the screen */
   padding: 10px 20px;
   font-size: 14px;
   background-color: #007bff;
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 0 0 5px 0;
   transition: background-color 0.1s ease;
-  z-index: 1000; /* Ensure the button is on top of other content */
+  z-index: 1000;
+  /* Ensure the button is on top of other content */
+  width: fit-content;
 }
 
 .login-back-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
+  /* Darker blue on hover */
 }
 
 /* Container for Graph and Description */
 .graphContainer {
-  display: flex; /* Flexbox to align items side by side */
-  justify-content: space-between; /* Space between description and graph */
-  align-items: flex-start; /* Align items at the top */
-  width: 90%; /* Adjust width as needed */
-  max-width: 1200px; /* Limit the width */
-  margin-top: 70px; /* Space between sections */
-  margin-bottom: 30px; /* Space between graphs */
+  display: flex;
+  /* Flexbox to align items side by side */
+  justify-content: space-between;
+  /* Space between description and graph */
+  align-items: flex-start;
+  /* Align items at the top */
+  width: 90%;
+  /* Adjust width as needed */
+  max-width: 1200px;
+  /* Limit the width */
+  margin-top: 70px;
+  /* Space between sections */
+  margin-bottom: 30px;
+  /* Space between graphs */
 }
 
 /* Description Section */
 .description {
-  width: 30%; /* Set the width for the description */
+  width: 30%;
+  /* Set the width for the description */
   padding: 20px;
   background-color: #f4f4f4;
   border-radius: 10px;
   font-size: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-right: 20px; /* Add space between description and graph */
+  margin-right: 20px;
+  /* Add space between description and graph */
 }
 
 .description h3 {
@@ -84,21 +110,30 @@
 }
 
 .topDescription {
-  width: 50%; /* Set the width for the description */
-  display: flex; /* Flexbox to align items inside */
-  justify-content: center; /* Horizontally center */
-  align-items: center; /* Vertically center */
+  width: 50%;
+  /* Set the width for the description */
+  display: flex;
+  /* Flexbox to align items inside */
+  justify-content: center;
+  /* Horizontally center */
+  align-items: center;
+  /* Vertically center */
   padding: 20px;
   font-size: 18px;
   background-color: #f4f4f4;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 0 auto; /* Horizontally center within its parent */
+  margin: 0 auto;
+  /* Horizontally center within its parent */
 }
 
 .generalMetricsHeader {
-  margin-top: 70px; /* Space between sections */
-  font-size: 64px;  /* Increase font size */
-  font-weight: bold; /* Optional, if you want it bold */
-  margin-bottom: 20px; /* Space below the header */
+  margin-top: 70px;
+  /* Space between sections */
+  font-size: 64px;
+  /* Increase font size */
+  font-weight: bold;
+  /* Optional, if you want it bold */
+  margin-bottom: 20px;
+  /* Space below the header */
 }
